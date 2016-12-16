@@ -18,4 +18,4 @@ RUN apt-get update \
 ADD import-carto.sh /usr/local/bin
 
 WORKDIR /opt/shared/osm_dumps
-ENTRYPOINT /bin/bash
+ENTRYPOINT [import-carto.sh]

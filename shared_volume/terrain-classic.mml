@@ -1,0 +1,1759 @@
+{
+  "name": "Terrain Classic",
+  "description": "",
+  "attribution": "Map Data © OpenStreetMap",
+  "center": [
+    -122.41,
+    37.74,
+    7
+  ],
+  "format": "png",
+  "interactivity": false,
+  "minzoom": 0,
+  "maxzoom": 18,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "metatile": 1,
+  "_layer_default": {
+    "srs-name": "3857",
+    "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+  },
+  "_pg_default": {
+    "type": "postgis",
+    "dbname": "terrain",
+    "host": "postgis",
+    "user": "gis",
+    "password": "passwd",
+    "port": "",
+    "geometry_field": "way",
+    "srid": 3857,
+    "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+    "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+    "max_async_connection": 4,
+    "max_size": 100,
+    "connect_timeout": 1,
+    "twkb_encoding": true
+  },
+  "_shp_default": {
+    "type": "shape",
+    "estimate_extent": false,
+    "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+    "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+  },
+  "Stylesheet": [
+    "map.mss",
+    "labels.mss",
+    "terrain-classic.mss"
+  ],
+  "Layer": [
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "land",
+      "id": "land",
+      "properties": {
+        "minzoom": 8
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    ST_ClipByBox2D(geom, !bbox!) geom\n  FROM land_polygons\n  WHERE geom && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "lc500mMODIS_high",
+      "id": "lc500mMODIS_high",
+      "properties": {
+        "minzoom": 0,
+        "maxzoom": 15
+      },
+      "geometry": "raster",
+      "Datasource": {
+        "type": "gdal",
+        "file": "landcover/LCType_z9.vrt"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "lc500mMODIS_urban",
+      "id": "lc500mMODIS_urban",
+      "properties": {
+        "minzoom": 9
+      },
+      "geometry": "raster",
+      "Datasource": {
+        "type": "gdal",
+        "file": "landcover/LCType_z9-urban-only.vrt"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "ne_10m_rivers_lake_centerlines_scale_rank",
+      "id": "ne_10m_rivers_lake_centerlines_scale_rank",
+      "properties": {
+        "minzoom": 4,
+        "maxzoom": 8
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_10m_rivers_lake_centerlines_scale_rank",
+        "encoding": "ISO-8859-1"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "ne_50m_lakes",
+      "id": "ne_50m_lakes",
+      "properties": {
+        "minzoom": 2,
+        "maxzoom": 5
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_50m_lakes",
+        "encoding": "ISO-8859-1"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "ne_10m_lakes",
+      "id": "ne_10m_lakes",
+      "properties": {
+        "minzoom": 6,
+        "maxzoom": 8
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_10m_lakes",
+        "encoding": "ISO-8859-1"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "ne_10m_ocean",
+      "id": "ne_10m_ocean",
+      "properties": {
+        "minzoom": 0,
+        "maxzoom": 7
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_10m_ocean",
+        "encoding": "ISO-8859-1"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "ne_50m_ocean",
+      "id": "ne_50m_ocean",
+      "properties": {
+        "minzoom": 0,
+        "maxzoom": 7
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "encoding": "ISO-8859-1",
+        "table": "(\n  SELECT\n    ST_ClipByBox2D(geom, !bbox!) geom\n  FROM ne_50m_ocean\n  WHERE geom && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "ne_110m_geography_marine_polys",
+      "id": "ne_110m_geography_marine_polys",
+      "properties": {
+        "minzoom": 2,
+        "maxzoom": 3
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_110m_geography_marine_polys",
+        "encoding": "ISO-8859-1"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "ne_50m_geography_marine_polys",
+      "id": "ne_50m_geography_marine_polys",
+      "properties": {
+        "minzoom": 4,
+        "maxzoom": 5
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_50m_geography_marine_polys",
+        "encoding": "ISO-8859-1"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "ne_10m_geography_marine_polys",
+      "id": "ne_10m_geography_marine_polys",
+      "properties": {
+        "minzoom": 6,
+        "maxzoom": 8
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_10m_geography_marine_polys",
+        "encoding": "ISO-8859-1"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "nullisland",
+      "id": "nullisland",
+      "class": "land",
+      "properties": {
+        "minzoom": 12
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "nullisland"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "country-shapes-50m",
+      "id": "country-shapes-50m",
+      "class": "shore",
+      "properties": {
+        "minzoom": 2,
+        "maxzoom": 3
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_50m_admin_0_countries_lakes"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "country-shapes-10m",
+      "id": "country-shapes-10m",
+      "class": "shore",
+      "properties": {
+        "minzoom": 4,
+        "maxzoom": 7
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    ST_ClipByBox2D(geom, !bbox!) geom\n  FROM ne_10m_admin_0_countries_lakes\n  WHERE geom && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "admin0-map-units-10m",
+      "id": "admin0-map-units-10m",
+      "properties": {
+        "minzoom": 4,
+        "maxzoom": 9
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_10m_admin_0_boundary_lines_map_units"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "admin1-lines-10m",
+      "id": "admin1-lines-10m",
+      "properties": {
+        "minzoom": 4,
+        "maxzoom": 9
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_10m_admin_1_states_provinces_lines"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "ne_50m_admin_0_boundary_lines_land",
+      "id": "ne_50m_admin_0_boundary_lines_land",
+      "class": "country-boundary",
+      "properties": {
+        "minzoom": 3,
+        "maxzoom": 4
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_50m_admin_0_boundary_lines_land"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "ne_10m_admin_0_boundary_lines_land",
+      "id": "ne_10m_admin_0_boundary_lines_land",
+      "class": "country-boundary-10m",
+      "properties": {
+        "minzoom": 5,
+        "maxzoom": 9
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_10m_admin_0_boundary_lines_land"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "admin1-lines-osm",
+      "id": "admin1-lines-osm",
+      "properties": {
+        "minzoom": 10
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    ST_ClipByBox2D(geometry, !bbox!) geometry,\n    name,\n    area_km2\n  FROM osm_admin\n  WHERE geometry && !bbox!\n    AND type = 'administrative'\n    AND admin_level = 4\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "urban-landuse-high",
+      "id": "urban-landuse-high",
+      "class": "urban-landuse",
+      "properties": {
+        "minzoom": 13
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    geometry,\n    type,\n    area\n  FROM osm_urban_areas\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "urban-landuse-med",
+      "id": "urban-landuse-med",
+      "class": "urban-landuse",
+      "properties": {
+        "minzoom": 11,
+        "maxzoom": 13
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    geometry,\n    type,\n    area\n  FROM osm_urban_areas_z13\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "urban-landuse-low",
+      "id": "urban-landuse-low",
+      "class": "urban-landuse",
+      "properties": {
+        "minzoom": 9,
+        "maxzoom": 11
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    geometry,\n    type,\n    area\n  FROM osm_urban_areas_z10\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "aerodromes",
+      "id": "aerodromes",
+      "properties": {
+        "minzoom": 12
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry\n  FROM osm_aeroways\n  WHERE type='aerodrome' and geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "green-areas-high",
+      "id": "green-areas-high",
+      "properties": {
+        "minzoom": 13
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    geometry,\n    type,\n    area\n  FROM osm_green_areas\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "green-areas-med",
+      "id": "green-areas-med",
+      "properties": {
+        "minzoom": 11,
+        "maxzoom": 13
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_green_areas_z13\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "green-areas-low",
+      "id": "green-areas-low",
+      "properties": {
+        "minzoom": 10,
+        "maxzoom": 10
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_green_areas_z10\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "landcover-high",
+      "id": "landcover-high",
+      "class": "landcover",
+      "properties": {
+        "minzoom": 13
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    geometry,\n    type,\n    area\n  FROM osm_landcover\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "landcover-med",
+      "id": "landcover-med",
+      "class": "landcover",
+      "properties": {
+        "minzoom": 11,
+        "maxzoom": 13
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    geometry,\n    type,\n    area\n  FROM osm_landcover_z13\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "landcover-low",
+      "id": "landcover-low",
+      "class": "landcover",
+      "properties": {
+        "minzoom": 9,
+        "maxzoom": 11
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    geometry,\n    type,\n    area\n  FROM osm_landcover_z10\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "water",
+      "id": "water",
+      "properties": {
+        "minzoom": 8
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "water_polygons"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "water-bodies-high",
+      "id": "water-bodies-high",
+      "properties": {
+        "minzoom": 14
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_water_areas\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "water-bodies-med",
+      "id": "water-bodies-med",
+      "properties": {
+        "minzoom": 11,
+        "maxzoom": 13
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_water_areas_z13\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "water-bodies-low",
+      "id": "water-bodies-low",
+      "properties": {
+        "minzoom": 8,
+        "maxzoom": 10
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_water_areas_z10\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "brown-areas-high",
+      "id": "brown-areas-high",
+      "properties": {
+        "minzoom": 13
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    geometry,\n    type,\n    area\n  FROM osm_brown_areas\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "brown-areas-med",
+      "id": "brown-areas-med",
+      "properties": {
+        "minzoom": 11,
+        "maxzoom": 13
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_brown_areas_z13\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "brown-areas-low",
+      "id": "brown-areas-low",
+      "properties": {
+        "minzoom": 10,
+        "maxzoom": 10
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_brown_areas_z10\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "ne-roads",
+      "id": "ne-roads",
+      "properties": {
+        "minzoom": 7,
+        "maxzoom": 8,
+        "cache-features": "on"
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_10m_roads"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "aeroways",
+      "id": "aeroways",
+      "properties": {
+        "minzoom": 12
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry\n  FROM osm_aeroways\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "tunnels",
+      "id": "tunnels",
+      "class": "tunnels",
+      "properties": {
+        "minzoom": 14,
+        "cache-features": "on"
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT *\n  FROM high_road(!scale_denominator!, !bbox!, 'is_tunnel=''yes''')\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "roads",
+      "id": "roads",
+      "class": "roads",
+      "properties": {
+        "minzoom": 14,
+        "cache-features": "on"
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT *\n  FROM high_road(!scale_denominator!, !bbox!)\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "roads_med",
+      "id": "roads_med",
+      "properties": {
+        "minzoom": 9,
+        "maxzoom": 13,
+        "cache-features": "on"
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT *\n  FROM high_road(!scale_denominator!, !bbox!, 'kind!=''highway''')\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "highways_med",
+      "id": "highways_med",
+      "properties": {
+        "minzoom": 9,
+        "maxzoom": 13,
+        "cache-features": "on"
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT *\n  FROM high_road(!scale_denominator!, !bbox!, 'kind=''highway''')\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "bridges",
+      "id": "bridges",
+      "class": "bridges",
+      "properties": {
+        "minzoom": 13,
+        "cache-features": "on",
+        "group-by": "explicit_layer"
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT *\n  FROM high_road(!scale_denominator!, !bbox!, 'is_bridge=''yes''')\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "buildings-high",
+      "id": "buildings-high",
+      "properties": {
+        "minzoom": 14
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    osm_id,\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_buildings\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "admin0-labels-z3",
+      "id": "admin0-labels-z3",
+      "properties": {
+        "minzoom": 3,
+        "maxzoom": 3
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "admin_0_countries_110m_points"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "admin0-labels-z4",
+      "id": "admin0-labels-z4",
+      "properties": {
+        "minzoom": 4,
+        "maxzoom": 4
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "admin_0_labels_z4"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "admin0-labels-z5",
+      "id": "admin0-labels-z5",
+      "properties": {
+        "minzoom": 5,
+        "maxzoom": 5
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "admin_0_labels_z5"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "admin0-labels-z6",
+      "id": "admin0-labels-z6",
+      "properties": {
+        "minzoom": 6,
+        "maxzoom": 6
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "admin_0_labels_z6"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "mountain_peaks_ne",
+      "id": "mountain_peaks_ne",
+      "properties": {
+        "minzoom": 6
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    (CASE\n    WHEN name = 'Haleakal?' THEN 'Haleakalā'\n    WHEN name = 'Volca?n Villarrica' THEN 'Villarrica'\n    WHEN name = 'Sn?ka' THEN 'Sněžka'\n    WHEN name = 'Qurnat as Sawd?' THEN 'Qurnat as Sawdā’'\n    WHEN name = 'Sabalon K?h' THEN 'Sabalan'\n    WHEN name = 'Jabal Sawd?' THEN 'Jabal Sawda'\n    WHEN name = 'Jabal an-Nab? Shuaib' THEN 'Jabal an-Nabi Shu’aib'\n    WHEN name = 'K?h-e Haji Ebrahim' THEN 'Kuhe Haji Ebrahim'\n    WHEN name = 'Mt. Dam?vand' THEN 'Mt. Damavand'\n    WHEN name = 'K?h-e Jang Qal''eh' THEN 'Kuh-e Jang Qal’eh'\n    WHEN name = 'Tirich M?r' THEN 'Tirich Mir'\n    WHEN name = 'Alada? Tepe' THEN ''\n    WHEN name = 'K?h-e Nay Band' THEN ''\n    WHEN name = 'K?h-e Hez?r' THEN ''\n    WHEN name = 'K?h-e Taftan' THEN ''\n    WHEN name = 'K?h-e R?zeh' THEN ''\n    ELSE name\n    END) AS name,\n    name_alt,\n    elevation,\n    comment,\n    geom,\n    featurecla\n  FROM ne_10m_geography_regions_elevation_points\n  WHERE geom && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "admin1-labels-50m-z4",
+      "id": "admin1-labels-50m-z4",
+      "properties": {
+        "minzoom": 4,
+        "maxzoom": 4
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "admin_1_labels_z4"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "admin1-labels-50m-z5",
+      "id": "admin1-labels-50m-z5",
+      "properties": {
+        "minzoom": 5,
+        "maxzoom": 5
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "admin_1_labels_z5"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "admin1-labels",
+      "id": "admin1-labels",
+      "properties": {
+        "minzoom": 5,
+        "maxzoom": 7
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    admin,\n    geometry,\n    scalerank\n  FROM ne_10m_admin_1_states_provinces_labels\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "water-bodies-labels-high",
+      "id": "water-bodies-labels-high",
+      "properties": {
+        "minzoom": 14
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_water_areas\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "water-bodies-labels-med",
+      "id": "water-bodies-labels-med",
+      "properties": {
+        "minzoom": 11,
+        "maxzoom": 13
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_water_areas_z13\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "water-bodies-labels-low",
+      "id": "water-bodies-labels-low",
+      "properties": {
+        "minzoom": 8,
+        "maxzoom": 10
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_water_areas_z10\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "green-areas-labels-high",
+      "id": "green-areas-labels-high",
+      "properties": {
+        "minzoom": 14
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_green_areas\n  WHERE geometry && !bbox!\n  ORDER BY area DESC\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "green-areas-labels-med",
+      "id": "green-areas-labels-med",
+      "properties": {
+        "minzoom": 11,
+        "maxzoom": 13
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_green_areas_z13\n  WHERE geometry && !bbox!\n  ORDER BY area DESC\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "green-areas-labels-low",
+      "id": "green-areas-labels-low",
+      "properties": {
+        "minzoom": 8,
+        "maxzoom": 10
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    name,\n    type,\n    geometry,\n    area\n  FROM osm_green_areas_z10\n  WHERE geometry && !bbox!\n  ORDER BY area DESC\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "major_road_labels",
+      "id": "major_road_labels",
+      "properties": {
+        "minzoom": 12
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(SELECT geometry,\n    (CASE WHEN highway = 'motorway'\n          THEN ''\n          ELSE replace(name, ' ', '   ')\n          END) AS name,\n    (CASE WHEN highway = 'motorway' AND CHAR_LENGTH(ref) BETWEEN 2 AND 15\n          THEN REGEXP_REPLACE(ref, E'\\s*;\\s*', E' / ', 'g')\n          ELSE ''\n          END) AS ref,\n    (CASE WHEN highway = 'motorway' AND CHAR_LENGTH(ref) BETWEEN 2 AND 15\n          THEN CHAR_LENGTH(ref)\n          ELSE 0\n          END) AS ref_length,\n    highway,\n    ST_Length(geometry) AS length,\n    (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0\n          WHEN highway IN ('footpath', 'track', 'footway', 'steps', 'pedestrian', 'path', 'cycleway') THEN 1\n          WHEN railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail') THEN 2\n          WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 3\n          WHEN highway = 'secondary' THEN 4\n          WHEN highway = 'tertiary' THEN 5\n          ELSE 9 END) AS priority,\n    (CASE WHEN highway IN ('secondary', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link') THEN 'major_road'\n          WHEN highway IN ('residential', 'unclassified', 'service', 'minor', 'road', 'tertiary') THEN 'minor_road'\n          WHEN railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail') THEN 'rail'\n          WHEN highway IN ('footpath', 'track', 'footway', 'steps', 'pedestrian', 'path', 'cycleway') THEN 'path'\n          ELSE '' END) AS kind,\n    (CASE WHEN tunnel = 1 THEN 'yes'\n          ELSE 'no' END) AS is_tunnel,\n    (CASE WHEN bridge = 1 THEN 'yes'\n          ELSE 'no' END) AS is_bridge\n FROM osm_roads\n WHERE geometry && !bbox!\n   AND highway IN ('secondary', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')\n ORDER BY priority ASC, length DESC)\n AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "minor_road_labels",
+      "id": "minor_road_labels",
+      "properties": {
+        "minzoom": 14
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(SELECT geometry,\n        replace(name, ' ', '   ') AS name,\n        highway,\n        ST_Length(geometry) AS length,\n        (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0\n              WHEN highway IN ('footpath', 'track', 'footway', 'steps', 'pedestrian', 'path', 'cycleway') THEN 1\n              WHEN railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail') THEN 2\n              WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 3\n              WHEN highway = 'secondary' THEN 4\n              WHEN highway = 'tertiary' THEN 5\n              ELSE 9 END) AS priority,\n        (CASE WHEN highway IN ('secondary', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link') THEN 'major_road'\n              WHEN highway IN ('residential', 'unclassified', 'service', 'minor', 'road', 'tertiary') THEN 'minor_road'\n              WHEN railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail') THEN 'rail'\n              WHEN highway IN ('footpath', 'track', 'footway', 'steps', 'pedestrian', 'path', 'cycleway') THEN 'path'\n              ELSE '' END) AS kind,\n        (CASE WHEN tunnel = 1 THEN 'yes'\n              ELSE 'no' END) AS is_tunnel,\n        (CASE WHEN bridge = 1 THEN 'yes'\n              ELSE 'no' END) AS is_bridge\n FROM osm_roads\n WHERE geometry && !bbox!\n   AND highway IN ('residential', 'unclassified', 'service', 'minor', 'road', 'tertiary')\n ORDER BY priority ASC, length DESC\n LIMIT 25)\n AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "highway_shields",
+      "id": "highway_shields",
+      "properties": {
+        "minzoom": 11
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n    ref,\n    CHAR_LENGTH(ref) as ref_length,\n    priority,\n    highway,\n    geometry\n  FROM highway_shields\n  WHERE geometry && !bbox!\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "continents",
+      "id": "continents",
+      "properties": {
+        "minzoom": 1,
+        "maxzoom": 2
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "continents"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "aries-places-labels",
+      "id": "aries-places-labels",
+      "properties": {
+        "minzoom": 4,
+        "maxzoom": 16
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geometry",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "(\n  SELECT\n  name,\n  zoom scalerank,\n  population,\n  geometry\n  FROM aries\n  WHERE geometry && !bbox!\n  ORDER BY population DESC, name\n) AS _\n"
+      }
+    },
+    {
+      "srs-name": "3857",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "airports",
+      "id": "airports",
+      "properties": {
+        "minzoom": 12
+      },
+      "Datasource": {
+        "type": "postgis",
+        "dbname": "terrain",
+        "host": "postgis",
+        "user": "gis",
+        "password": "passwd",
+        "port": "",
+        "geometry_field": "geom",
+        "srid": 3857,
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "max_async_connection": 4,
+        "max_size": 100,
+        "connect_timeout": 1,
+        "twkb_encoding": true,
+        "table": "ne_10m_airports"
+      }
+    }
+  ]
+}

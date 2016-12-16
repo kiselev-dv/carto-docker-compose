@@ -10,16 +10,25 @@ layers:
   - name: osm_carto
     title: Open Street Map Carto
     sources: [osm_carto_cache]
+  - name: stamen_terrain
+    title: Stamen Terrain
+    sources: [stamen_terrain_cache]
 
 caches:
   osm_carto_cache:
     grids: [epsg3857]
     sources: [osm_carto_source]
+  stamen_terrain_cache:
+    grids: [epsg3857]
+    sources: [stamen_terrain_source]
 
 sources:
   osm_carto_source:
     type: mapnik
     mapfile: /opt/shared/styles/openstreetmap-carto/mapnik.xml
+  stamen_terrain_source:
+    type: mapnik
+    mapfile: /opt/shared/styles/terrain-classic/mapnik.xml
 
 grids:
   epsg4326:
