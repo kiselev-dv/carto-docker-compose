@@ -1,0 +1,31 @@
+version: '2'
+services:
+  postgis:
+    build: ../postgis
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - /opt/ep/stamen-docker/pg_sockets:/var/run/postgresql/
+    environment:
+      - ALLOW_IP_RANGE=0.0.0.0/0
+      - POSTGRES_USER=gis
+      - POSTGRES_PASS=passwd
+      - HSTORE=true
+      - PGDATA=/var/lib/postgresql/data
+  import:
+    build: ../import
+    volumes:
+      - /opt/ep/stamen-docker/shared_volume:/opt/shared
+    environment:
+      - PGPASS=passwd
+  rendering:
+    build: ../rendering
+    volumes:
+      - /opt/ep/stamen-docker/shared_volume:/opt/shared
+      - /opt/ep/stamen-docker/pg_sockets:/var/run/postgresql/
+    environment:
+      - PGPASS=passwd
+    ports:
+      - "6789:6789"
+      - "8080:8080"
+volumes:
+  pg_data: {}

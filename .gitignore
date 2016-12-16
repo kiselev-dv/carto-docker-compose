@@ -1,2 +1,4 @@
 pg_sockets
-osm_dumps/*
+shared_volume/osm_dumps/*
+shared_volume/styles/*
+*.pbf

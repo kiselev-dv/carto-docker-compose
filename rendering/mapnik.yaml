@@ -1,0 +1,40 @@
+# Tile service (compatible with OSM/etc.)
+#     first tile: http://localhost:8080/tms/osm_carto/epsg3857/0/0/0.png
+
+services:
+  demo:
+  tms:
+    use_grid_names: true
+
+layers:
+  - name: osm_carto
+    title: Open Street Map Carto
+    sources: [osm_carto_cache]
+
+caches:
+  osm_carto_cache:
+    grids: [epsg3857]
+    sources: [osm_carto_source]
+
+sources:
+  osm_carto_source:
+    type: mapnik
+    mapfile: /opt/shared/styles/openstreetmap-carto/mapnik.xml
+
+grids:
+  epsg4326:
+    srs: EPSG:4326
+    num_levels: 20
+
+  epsg3857:
+    #base: GLOBAL_MERCATOR
+    srs: EPSG:3857
+    num_levels: 20
+
+  epsg3857nw:
+    base: GLOBAL_MERCATOR
+    #srs: EPSG:3857
+    num_levels: 20
+    origin: nw
+
+globals:
