@@ -4,24 +4,30 @@ services:
     build: ../postgis
     volumes:
       - pg_data:/var/lib/postgresql/data
-      - /opt/ep/stamen-docker/pg_sockets:/var/run/postgresql/
+      - ../pg_sockets:/var/run/postgresql/
     environment:
       - ALLOW_IP_RANGE=0.0.0.0/0
       - POSTGRES_USER=gis
       - POSTGRES_PASS=passwd
       - HSTORE=true
       - PGDATA=/var/lib/postgresql/data
-  import:
-    build: ../import
+  imp_osm_carto:
+    build: ../imp_osm_carto
     volumes:
-      - /opt/ep/stamen-docker/shared_volume:/opt/shared
+      - ../shared_volume:/opt/shared
+    environment:
+      - PGPASS=passwd
+  imp_stamen_terrain:
+    build: ../imp_stamen_terrain
+    volumes:
+      - ../shared_volume:/opt/shared
     environment:
       - PGPASS=passwd
   rendering:
     build: ../rendering
     volumes:
-      - /opt/ep/stamen-docker/shared_volume:/opt/shared
-      - /opt/ep/stamen-docker/pg_sockets:/var/run/postgresql/
+      - ../shared_volume:/opt/shared
+      - ../pg_sockets:/var/run/postgresql/
     environment:
       - PGPASS=passwd
     ports:
