@@ -12,13 +12,17 @@ RUN apt-get update \
   && apt-get install -y \
     build-essential \
     tmux \
+    git \
     vim \
     nano \
     curl \
+    wget \
     unzip \
     fonts-noto-cjk fonts-noto-hinted fonts-noto-unhinted ttf-unifont \
     fonts-dejavu-core \
     nodejs \
+    gdal-bin \
+    pv \
     postgresql-client \
     python-pip \
     python-imaging python-yaml libproj-dev \
@@ -39,9 +43,35 @@ RUN mkdir /opt/mapproxy
 ADD mapnik.yaml /opt/mapproxy/mapnik.yaml
 ADD entrypoint.sh /usr/local/bin/entrypoint.sh
 
-WORKDIR /opt/mapproxy/
+### Install tilemill
 
-EXPOSE 8080
+
+RUN mkdir /opt/tilemill &&\
+  cd /opt/tilemill &&\
+  git clone https://github.com/tilemill-project/tilemill.git && \
+  cd tilemill && \
+  npm install
+
+## Install Imposm
+
+RUN \
+  wget http://imposm.org/static/rel/imposm3-0.1dev-20140811-3f3c12e-linux-x86-64.tar.gz && \
+  tar xvf imposm3-0.1dev-20140811-3f3c12e-linux-x86-64.tar.gz && \
+  mv imposm3-0.1dev-20140811-3f3c12e-linux-x86-64 /opt/imposm3 && \
+  rm imposm3-0.1dev-20140811-3f3c12e-linux-x86-64.tar.gz
+
+ENV PATH $PATH:/opt/imposm3
+
+# Install tessera
+RUN npm install -g tessera ;\
+  npm install -g tilelive mapnik tilelive-mapnik tilelive-blend tilelive-carto tilelive-http
+
+#Change hillshade source
+ADD tessera.json /opt/shared/styles/terrain-classic/tessera.json
+
+WORKDIR /opt/shared/styles/terrain-classic
+
+EXPOSE 6789
 
 ENTRYPOINT /usr/local/bin/entrypoint.sh
 #ENTRYPOINT /bin/bash
