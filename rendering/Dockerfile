@@ -69,7 +69,11 @@ RUN npm install -g tessera ;\
 #Change hillshade source
 ADD tessera.json /opt/shared/styles/terrain-classic/tessera.json
 
+ADD import.sh /usr/local/bin/import.sh
+
 WORKDIR /opt/shared/styles/terrain-classic
+
+RUN npm install pgexplode
 
 EXPOSE 6789
 
