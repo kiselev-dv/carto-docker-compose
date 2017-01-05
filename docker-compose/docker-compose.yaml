@@ -22,6 +22,7 @@ services:
     volumes:
       - ../shared_volume:/opt/shared
       - ../pg_sockets:/var/run/postgresql/
+      #- /media/data/cache:/tmp/cache
     # volumes_from:
     #   - stamen_data
     environment:

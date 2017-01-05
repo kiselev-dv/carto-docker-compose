@@ -1,7 +1,8 @@
 cd /opt/shared/styles/terrain-classic
 
-imposm3 import --cachedir cache \
+imposm3 import --cachedir /tmp/cache \
   -overwritecache \
+  -deployproduction \
   -mapping=imposm3_mapping.json \
   -connection="$DATABASE_URL" \
   -write \

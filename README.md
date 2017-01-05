@@ -52,4 +52,28 @@
   ```
   docker-compose up -d
   ```
-3. Import data
+3. Run `make db/CA`. We want to import whole planet, but we still need to run
+  `make db/CA` to have database initialized.
+
+  ```
+  # Enter container
+  docker-compose exec rendering bash
+
+  make db/CA
+  make db/shared
+
+  # that will create tables and data scheme in import schema.
+  # we need to rotate it to public:
+  imposm3 import -connection "$DATABASE_URL" -mapping imposm3_mapping.json -deployproduction
+  ```
+
+### Import data.
+  imposm3 use /tmp/cache dir. Check, that you have enough space.
+  Uncomment and edit related volume in `docker-compose.yaml`
+
+  ```
+  # Enter container
+  docker-compose exec rendering bash
+
+  import.sh /opt/shared/osm_dumps/planet-latest.osm.pbf
+  ```
